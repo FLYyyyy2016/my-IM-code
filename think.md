@@ -1,5 +1,3 @@
-## 使用socket
+## 组播socket的建立
 
-首先，要学会使用socket，golang的socket和c与python的接口大致相同。都采用了标准的系统接口式的调用。
-
-然后，使用了golang中的bufio的scaner来做接受byte的分割工具，这里其实手动也能实现，不过调用系统组件更为方便，可以想象一下scaner的实现方式（大致应该是用一个缓存来读取reader数据，遇到换行符或者特殊符号时候返回）
+一般socket实现通常是AtoB和BtoA的实现，我们可以通过标记server和client的方式来区分谁作为消息的分发中心，然后通过server端记录一个conn的数组，并把所有的收到的消息通过这些conn群发出去，就实现了基本的组播功能。
